@@ -1,0 +1,58 @@
+services:
+  db_dev:
+    image: postgres:18
+    container_name: django-db-dev
+    env_file:
+      - .env.dev
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    volumes:
+      - django_db_dev:/var/lib/postgresql
+    ports:
+      - "5434:5432"
+
+  web_dev:
+    build: .
+    container_name: django-web-dev
+    env_file:
+      - .env.dev
+    depends_on:
+      db_dev:
+        condition: service_healthy
+    volumes:
+      - .:/app
+      - django_venv_dev:/app/.venv
+      - ${HOME}/.gitconfig:/root/.gitconfig:ro
+    ports:
+      - "8000:8000"
+
+  db_prod:
+    image: postgres:18
+    container_name: django-db-prod
+    env_file:
+      - .env.prod
+    volumes:
+      - django_db_prod:/var/lib/postgresql
+    ports:
+      - "5435:5432"
+
+  web_prod:
+    build: .
+    container_name: django-web-prod
+    env_file:
+      - .env.prod
+    depends_on:
+      - db_prod
+    volumes:
+      - ${HOME}/.gitconfig:/root/.gitconfig:ro
+    ports:
+      - "8001:8000"
+
+volumes:
+  django_db_dev:
+  django_db_prod:
+  django_venv_dev:

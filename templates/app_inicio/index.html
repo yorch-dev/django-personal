@@ -1,0 +1,202 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block link %}
+  <link rel="stylesheet" href="{% static 'css/app_inicio/index.css' %}">
+{% endblock link %}
+
+{% block title %}
+  Inicio - WFM
+{% endblock title %}
+
+{% block body %}
+
+
+<div class="container">
+
+  <h1 class="text-center">Mis Procesos</h1>
+
+  <div class="row text-center mt-5">
+
+
+    <div class="col-md-5 d-flex flex-column">
+      <button
+        class="boton-seleccion btn btn-info btn-lg d-flex justify-content-between align-items-center"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#colapsable-carga"
+        aria-expanded="false"
+        aria-controls="colapsable-carga">
+        <i class="bi bi-file-arrow-down"></i>
+        <span>Cargar y exportar</span>
+        <i class="bi bi-file-arrow-up"></i>
+      </button>
+      
+      <button
+        class="boton-seleccion btn btn-info btn-lg mt-4 d-flex justify-content-between align-items-center"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#colapsable-vistas"
+        aria-expanded="false"
+        aria-controls="colapsable-vistas">
+        <i class="bi bi-graph-up"></i>
+        <span>Análisis y control</span>
+        <i class="bi bi-sliders"></i>
+      </button>
+      <button
+        class="boton-seleccion btn btn-info btn-lg mt-4 d-flex justify-content-between align-items-center"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#colapsable-utils"
+        aria-expanded="false"
+        aria-controls="colapsable-utils">
+        <i class="bi bi-wrench-adjustable"></i>
+        <span>Utilidades</span>
+        <i class="bi bi-gear"></i>
+      </button>
+
+    </div>
+
+    <div class="col-md-7" id="panel">
+
+
+      <div id="colapsable-carga" class="collapse" data-bs-parent="#panel">
+        <div>
+          {% comment %} Leer archivo de Omnia y actualizar en base de datos {% endcomment %}
+          <a
+            href="#"
+            class="btn btn-primary btn-sm mt-2 w-75"
+          >
+            Actualizar nómina de Omnia
+          </a> <br>
+  
+          {% comment %} Cargar archivos de Genesys {% endcomment %}
+          <a
+            href="#"
+            class="btn btn-primary btn-sm mt-2 w-75"
+          >
+            Cargar archivos de Genesys
+          </a>
+
+          {% comment %} Crear cargas Omnia {% endcomment %}
+          <a
+            href="#"
+            class="btn btn-primary btn-sm mt-2 w-75"
+          >
+            Crear carga Omnia
+          </a>
+
+          {% comment %} Cargar rendimiento colas {% endcomment %}
+          <a
+            href="#"
+            class="btn btn-primary btn-sm mt-2 w-75"
+          >
+            Cargar rendimiento colas
+          </a>
+
+          {% comment %} Cargar estados y rendimientos de agentes {% endcomment %}
+          <a
+            href="#"
+            class="btn btn-primary btn-sm mt-2 w-75"
+          >
+            Cargar estados y rendimientos de agentes
+          </a>
+
+          {% comment %} Cargar reportes {% endcomment %}
+          <a
+            href="#"
+            class="btn btn-primary btn-sm mt-2 w-75"
+          >
+            Cargar reportes
+          </a>
+
+          {% comment %} Exportar nómina interna {% endcomment %}
+          <a
+            href="#"
+            class="btn btn-primary btn-sm mt-2 w-75"
+          >
+            Exportar nómina interna
+          </a>
+          <a
+            href="#"
+            class="btn btn-primary btn-sm mt-2 w-75"
+          >
+            Cargar estados y rendimientos de agentes
+          </a>
+
+          {% comment %} Cargar reportes {% endcomment %}
+          <a
+            href="#"
+            class="btn btn-primary btn-sm mt-2 w-75"
+          >
+            Cargar reportes
+          </a>
+
+          {% comment %} Exportar nómina interna {% endcomment %}
+          <a
+            href="#"
+            class="btn btn-primary btn-sm mt-2 w-75"
+          >
+            Exportar nómina interna
+          </a>
+          <a
+            href="#"
+            class="btn btn-primary btn-sm mt-2 w-75"
+          >
+            Cargar estados y rendimientos de agentes
+          </a>
+
+          {% comment %} Cargar reportes {% endcomment %}
+          <a
+            href="#"
+            class="btn btn-primary btn-sm mt-2 w-75"
+          >
+            Cargar reportes
+          </a>
+
+          {% comment %} Exportar nómina interna {% endcomment %}
+          <a
+            href="#"
+            class="btn btn-primary btn-sm mt-2 w-75"
+          >
+            Exportar nómina interna
+          </a>
+        </div>
+
+      </div>
+
+
+      <div id="colapsable-vistas" class="collapse" data-bs-parent="#panel">
+        
+        <a
+          href="#"
+          class="btn btn-primary btn-sm mt-2 w-75"
+        >
+          Personas - Peopleware
+        </a>
+
+        <a
+          href="#"
+          class="btn btn-primary btn-sm mt-2 w-75"
+        >
+          Info servicios
+        </a> <br>
+      </div>
+
+      <div id="colapsable-utils" class="collapse" data-bs-parent="#panel">
+        <a
+          href="#"
+          class="btn btn-primary btn-sm mt-2 w-75"
+        >
+          Crear archivo carga omnia
+        </a> <br>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+
+<script src="{% static 'js/index/index.js' %}"></script>
+{% endblock body %}

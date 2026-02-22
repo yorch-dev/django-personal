@@ -1,0 +1,21 @@
+
+.boton-seleccion[aria-expanded="true"] {
+  background-color: var(--bs-info);
+  border-color: var(--bs-light);
+  font-weight: 600;
+}
+
+.boton-seleccion[aria-expanded="false"] {
+  background-color: var(--bs-secondary);
+  border-color: var(--bs-warning);
+}
+
+.boton-seleccion:hover {
+  background-color: var(--bs-success);
+  border-color: var(--bs-dark);
+  font-weight: 600;
+}
+
+.collapsing {
+  transition: height 0.25s ease;
+}
