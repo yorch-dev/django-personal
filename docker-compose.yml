@@ -26,9 +26,9 @@ services:
     volumes:
       - .:/app
       - django_venv_dev:/app/.venv
-      - ${HOME}/.gitconfig:/root/.gitconfig:ro
     ports:
       - "8000:8000"
+    user: "${UID:-1000}:${GID:-1000}"
 
   db_prod:
     image: postgres:18
@@ -41,16 +41,18 @@ services:
       - "5435:5432"
 
   web_prod:
-    build: .
+    build:
+      args:
+        UID: ${UID:-1000}
+        GID: ${GID:-1000}
     container_name: django-web-prod
     env_file:
       - .env.prod
     depends_on:
       - db_prod
-    volumes:
-      - ${HOME}/.gitconfig:/root/.gitconfig:ro
     ports:
       - "8001:8000"
+    user: "${UID:-1000}:${GID:-1000}"
 
 volumes:
   django_db_dev:
