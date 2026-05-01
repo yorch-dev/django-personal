@@ -14,7 +14,7 @@
 
 <div class="container">
 
-  <h1 class="text-center">Mis Procesos</h1>
+  <h1 class="text-center">Página de inicio</h1>
 
   <div class="row text-center mt-5">
 
@@ -64,10 +64,10 @@
         <div>
           {% comment %} Leer archivo de Omnia y actualizar en base de datos {% endcomment %}
           <a
-            href="#"
+            href="{% url "index_tutoriales_front" %}"
             class="btn btn-primary btn-sm mt-2 w-75"
           >
-            Actualizar nómina de Omnia
+            Tutoriales front
           </a> <br>
   
           {% comment %} Cargar archivos de Genesys {% endcomment %}
