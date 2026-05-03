@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     # Apps locales,
     'app_inicio.apps.AppInicioConfig',
     'app_tutoriales_front.apps.AppTutorialesFrontConfig',
+    'app_finanzas_personales.apps.AppFinanzasPersonalesConfig',
 ]
 
 MIDDLEWARE = [
