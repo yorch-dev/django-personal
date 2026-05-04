@@ -1,0 +1,25 @@
+{
+  "name": "Django Dev Template",
+  "dockerComposeFile": [
+    "../docker-compose.yml"
+  ],
+  "service": "web_dev",
+  "workspaceFolder": "/app",
+  "remoteUser": "root",
+  "shutdownAction": "stopCompose",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.black-formatter",
+        "ms-python.flake8",
+        "openai.chatgpt",
+        "batisteo.vscode-django"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/app/.venv/bin/python"
+      }
+    }
+  },
+  "postCreateCommand": "uv sync --frozen --no-dev"
+}
