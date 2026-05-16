@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body %}
+<h1>Resumen de Compras</h1>
+{% if resumen %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Categoría</th>
+            <th>Habitación</th>
+            <th>Artículo</th>
+            <th>Fecha Compra</th>
+            <th>Precio Compra</th>
+            <th>Fecha Reemplazo Aprox.</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in resumen %}
+        <tr>
+            <td>{{ item.categoria }}</td>
+            <td>{{ item.habitacion }}</td>
+            <td>{{ item.articulo }}</td>
+            <td>{{ item.fecha_compra|date:"d/m/Y" }}</td>
+            <td>{{ item.precio_compra }} CLP</td>
+            <td>
+                {% if item.fecha_reemplazo_aprox %}
+                    {{ item.fecha_reemplazo_aprox|date:"d/m/Y" }}
+                {% else %}
+                    -
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No hay compras registradas.</p>
+{% endif %}
+
+<hr>
+
+<h2>Costo Mensual por Artículo (<strong>Ahorro Objetivo Mensual: {{ total_mensual }} CLP</strong>)</h2>
+<p class="text-muted">Cálculo del costo mensual que representa cada artículo basado en su precio de referencia y vida útil.</p>
+
+{% if costo_mensual_articulos %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Artículo</th>
+            <th>Categoría</th>
+            <th>Habitación</th>
+            <th>Precio Referencia</th>
+            <th>Vida Útil (Meses)</th>
+            <th>Costo Mensual</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for articulo in costo_mensual_articulos %}
+        <tr>
+            <td>{{ articulo.nombre }}</td>
+            <td>{{ articulo.categoria }}</td>
+            <td>{{ articulo.habitacion }}</td>
+            <td>{{ articulo.precio_referencia }} CLP</td>
+            <td>{{ articulo.vida_util_meses }}</td>
+            <td>{{ articulo.costo_mensual }} CLP</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% else %}
+<p>No hay artículos registrados.</p>
+{% endif %}
+{% endblock %}

@@ -27,8 +27,15 @@ services:
       - .:/app
       - django_venv_dev:/app/.venv
     ports:
-      - "8000:8000"
+      - "8004:8000"
     user: "${UID:-1000}:${GID:-1000}"
+    command: >
+      sh -c '
+        until /app/.venv/bin/python manage.py migrate --noinput >/dev/null 2>&1; do
+          sleep 1;
+        done;
+        /app/.venv/bin/python manage.py runserver 0.0.0.0:8000
+      '
 
   db_prod:
     image: postgres:18
@@ -51,8 +58,9 @@ services:
     depends_on:
       - db_prod
     ports:
-      - "8001:8000"
+      - "8005:8000"
     user: "${UID:-1000}:${GID:-1000}"
+    command: sh -c "python manage.py collectstatic --noinput && gunicorn base_django.wsgi:application --bind 0.0.0.0:8000 --workers 3 --log-file -"
 
 volumes:
   django_db_dev:
