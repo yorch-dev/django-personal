@@ -14,9 +14,14 @@ services:
       - django_db_dev:/var/lib/postgresql
     ports:
       - "5434:5432"
+    restart: unless-stopped
 
   web_dev:
-    build: .
+    build:
+      context: .
+      args:
+        UID: ${UID:-1000}
+        GID: ${GID:-1000}
     container_name: django-web-dev
     env_file:
       - .env.dev
@@ -26,16 +31,18 @@ services:
     volumes:
       - .:/app
       - django_venv_dev:/app/.venv
+      - django_uv_cache_dev:/app/.cache/uv
     ports:
       - "8004:8000"
     user: "${UID:-1000}:${GID:-1000}"
     command: >
       sh -c '
-        until /app/.venv/bin/python manage.py migrate --noinput >/dev/null 2>&1; do
-          sleep 1;
-        done;
-        /app/.venv/bin/python manage.py runserver 0.0.0.0:8000
+        set -e;
+        uv sync --frozen --no-dev;
+        python manage.py migrate --noinput;
+        python manage.py runserver 0.0.0.0:8000
       '
+    restart: unless-stopped
 
   db_prod:
     image: postgres:18
@@ -46,9 +53,11 @@ services:
       - django_db_prod:/var/lib/postgresql
     ports:
       - "5435:5432"
+    restart: unless-stopped
 
   web_prod:
     build:
+      context: .
       args:
         UID: ${UID:-1000}
         GID: ${GID:-1000}
@@ -61,8 +70,10 @@ services:
       - "8005:8000"
     user: "${UID:-1000}:${GID:-1000}"
     command: sh -c "python manage.py collectstatic --noinput && gunicorn base_django.wsgi:application --bind 0.0.0.0:8000 --workers 3 --log-file -"
+    restart: unless-stopped
 
 volumes:
   django_db_dev:
   django_db_prod:
   django_venv_dev:
+  django_uv_cache_dev:

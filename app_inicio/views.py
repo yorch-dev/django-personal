@@ -4,7 +4,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.urls import reverse_lazy
 from django.contrib import messages
 
-# Create your views here.
+
 def index(request):
     return render(request, 'app_inicio/index.html')
 

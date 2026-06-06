@@ -67,6 +67,9 @@ docker compose logs -f db_dev
 docker compose exec web_dev python manage.py makemigrations
 docker compose exec web_dev python manage.py migrate
 
+docker-compose exec web_dev /app/.venv/bin/python manage.py migrate
+docker-compose exec web_dev /app/.venv/bin/python manage.py createsuperuser
+
 # Admin
 docker compose exec web_dev python manage.py createsuperuser
 

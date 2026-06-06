@@ -15,6 +15,11 @@
 <div class="container">
 
   <h1 class="text-center">Página de inicio</h1>
+  {% if user.is_authenticated %}
+    <h6>Bienvenido, {{ user.username }}!</h6>
+  {% else %}
+    <h6>Bienvenido, invitado!</h6>
+  {% endif %}
 
   <div class="row text-center mt-5">
 
