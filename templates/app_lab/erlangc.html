@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block link %}
+  {% comment %} <link rel="stylesheet" href="{% static 'css/app_lab/index.css' %}"> {% endcomment %}
+{% endblock link %}
+
+{% block title %}
+  Lab - Erlang
+{% endblock title %}
+
+{% block body %}
+
+
+<div class="container">
+
+  <h1 class="text-center">Lab - ErlangC</h1>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form id="erlangc-form" method="get" action="{% url 'erlangc' %}">
+        <div class="mb-3">
+          <label for="llamadas" class="form-label">Llamadas (λ)</label>
+          <input type="number" step="0.01" class="form-control" id="llamadas" name="llamadas" value="{{ llamadas|default:'0' }}" required>
+        </div>
+        <div class="mb-3">
+          <label for="tmo" class="form-label">Tiempo Medio de Operación (TMO)</label>
+          <input type="number" step="0.01" class="form-control" id="tmo" name="tmo" value="{{ tmo|default:'0' }}" required>
+        </div>
+        <div class="mb-3">
+          <label for="servicio" class="form-label">Nivel de Servicio Requerido (%)</label>
+          <input type="number" step="0.01" class="form-control" id="servicio" name="servicio_requerido" value="{{ servicio_requerido|default:'0' }}" required>
+        </div>
+        <div class="mb-3">
+          <label for="tiempo_objetivo" class="form-label">Tiempo Objetivo para el Nivel de Servicio (s)</label>
+          <input type="number" step="0.01" class="form-control" id="tiempo_objetivo" name="tiempo_objetivo" value="{{ tiempo_objetivo|default:'0' }}" required>
+        </div>
+        <div class="mb-3">
+          <label for="ocupacion_maxima" class="form-label">Ocupación Máxima Permitida (%)</label>
+          <input type="number" step="0.01" class="form-control" id="ocupacion_maxima" name="ocupacion_maxima" value="{{ ocupacion_maxima|default:'80' }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Calcular Agentes Requeridos</button>
+      </form>
+      <div id="resultado" class="mt-4">
+        {% if resultados %}
+          <h3>Resultados</h3>
+          <p>{{ resultados }}</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+
+<script src="{% static 'js/app_index/index.js' %}"></script>
+{% endblock body %}

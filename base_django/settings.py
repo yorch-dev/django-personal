@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 import environ
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +19,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env()
 
 if not env.str('SECRET_KEY', default=None):
-    raise Exception(".env file no cargado correctamente. Faltan variables críticas.")
+    raise Exception(
+        ".env file no cargado correctamente. Faltan variables críticas."
+    )
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
     'app_inicio.apps.AppInicioConfig',
     'app_tutoriales_front.apps.AppTutorialesFrontConfig',
     'app_finanzas_personales.apps.AppFinanzasPersonalesConfig',
+    'app_lab.apps.AppLabConfig',
 ]
 
 MIDDLEWARE = [

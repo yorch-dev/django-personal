@@ -26,4 +26,5 @@ urlpatterns = [
     path('', include('app_inicio.urls')),
     path('front/', include('app_tutoriales_front.urls')),
     path('finanzas/', include('app_finanzas_personales.urls')),
+    path('lab/', include('app_lab.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
